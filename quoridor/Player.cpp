@@ -1,4 +1,4 @@
-//plik zawieraj¹cy cia³a metod klasy Player oraz jej klas pochodnych: Human i Bot
+//plik zawierajacy ciala metod klasy Player oraz jej klas pochodnych: Human i Bot
 #include"Player.h"
 
 //KONSTRUKTORY:
@@ -20,7 +20,7 @@ void Player::set_pawn(int x, int y) { pawn.coord_x = x; pawn.coord_y = y; }
 
 
 //METODY KLASY Player:
-int Player::check_player_wall(int x, int y) {//przeszukiwanie kontenera z œciankami konkretnego gracza
+int Player::check_player_wall(int x, int y) {//przeszukiwanie kontenera ze sciankami konkretnego gracza
 	for (auto it = walls_vec.begin(); it != walls_vec.end(); it++) {
 		if (x == it->coord_x && y == it->coord_y) {
 			return it->get_type();
@@ -32,15 +32,15 @@ int Player::check_player_wall(int x, int y) {//przeszukiwanie kontenera z œciank
 			return it->get_type();
 		}
 	}
-	return 2;//zwracam typ 2, gdy œcianka jest nieistniej¹ca
+	return 2;//zwracam typ 2, gdy scianka jest nieistniejaca
 }
 
-void Player::add_wall(int x, int y) {//dodawanie œciany do vektora œcian
+void Player::add_wall(int x, int y) {//dodawanie sciany do vektora scian
 	Wall wall(x, y);
 	walls_vec.push_back(wall);
 }
 
-void Player::move_pawn(int arrow) {//w zale¿noœci od kierunku, trzymanego w zmiennej arrow, modyfikacja koordynatów pionka
+void Player::move_pawn(int arrow) {//w zaleznosci od kierunku, trzymanego w zmiennej arrow, modyfikacja koordynatow pionka
 	switch (arrow) {
 	case 72:
 		pawn.coord_y = pawn.coord_y - 2;
@@ -59,7 +59,7 @@ void Player::move_pawn(int arrow) {//w zale¿noœci od kierunku, trzymanego w zmie
 
 
 //METODY KLASY Human:
-int Human::load_type_of_move() {//jesli gracz wcisn¹³ strze³kê, rozstrzygam, ¿e nast¹pi ruch pionkiem, dowolny inny klawisz - bedzie dodawa³ œciankê
+int Human::load_type_of_move() {//jesli gracz wcisnal strzalke, rozstrzygam, ze nastapi ruch pionkiem, dowolny inny klawisz - bedzie dodawal scianke
 	int key = _getch();
 	if (key == 0 || key == 224) {
 		return _getch();
@@ -67,7 +67,7 @@ int Human::load_type_of_move() {//jesli gracz wcisn¹³ strze³kê, rozstrzygam, ¿e 
 	else return -1;
 }
 
-coords Human::load_wall_data() {//pobieranie wspó³rzêdnych œcianki z klawiatury, konwersja char na int dla wartoœci odpowiadaj¹cej za wiersz
+coords Human::load_wall_data() {//pobieranie wspolrzednych scianki z klawiatury, konwersja char na int dla wartosci odpowiadajacej za wiersz
 	int column_num, row_num;
 	char row_letter;
 	cout << "\nPodaj litere wiersza (wielkosc litery nie ma znaczenia): ";
@@ -95,7 +95,7 @@ coords Human::load_wall_data() {//pobieranie wspó³rzêdnych œcianki z klawiatury,
 
 
 
-int Human::load_diagonal_move(int direction) {//okreœlenie kierunku ruchu skoœnego, poprzez pobranie kierunku z klawiatury
+int Human::load_diagonal_move(int direction) {//okreslenie kierunku ruchu skosnego, poprzez pobranie kierunku z klawiatury
 	cerr << "Warunkowo pionek poruszy sie na skos (konflikt ze scianka), wcisnij strzalke: \n";
 	int key = _getch();
 	if (key == 0 || key == 224) {
@@ -106,7 +106,7 @@ int Human::load_diagonal_move(int direction) {//okreœlenie kierunku ruchu skoœne
 
 
 //METODY KLASY Bot
-int Bot::load_type_of_move() {//losowanie wartoœci (-1 - postawienie œcianki, pozosta³e - poszczególne kierunki)
+int Bot::load_type_of_move() {//losowanie wartosci (-1 - postawienie scianki, pozostale - poszczegolne kierunki)
 	int key;//wartoœæ do której wpisze typ ruchu
 	if (walls_vec.size() < VEC_SIZE) {
 		int rd = rand() % 5;
@@ -121,9 +121,9 @@ int Bot::load_type_of_move() {//losowanie wartoœci (-1 - postawienie œcianki, po
 	return key;
 }
 
-int Bot::load_diagonal_move(int direction) {//losowanie jednego z dwóch kierunków w przypadku ruchu po skosie
+int Bot::load_diagonal_move(int direction) {//losowanie jednego z dwoch kierunkow w przypadku ruchu po skosie
 	int rd = rand() % 2;
-	int key = 0;//wartoœæ do której wpisze kierunek ruchu na skos
+	int key = 0;//wartosc do ktorej wpisze kierunek ruchu na skos
 	if (direction == UP || direction == DOWN) {
 		int tab[] = { 75,77 };
 		key = tab[rd];
@@ -135,8 +135,8 @@ int Bot::load_diagonal_move(int direction) {//losowanie jednego z dwóch kierunkó
 	return key;
 }
 
-coords Bot::load_wall_data() {//losowanie koordynatów œcianki
-	int first, sec;//wartoœci do których wylosujê koordynaty œcianki
+coords Bot::load_wall_data() {//losowanie koordynatow scianki
+	int first, sec;//wartosci do ktorych wylosuje koordynaty scianki
 	coords ret;
 	if (rand() % 2 == 0) {
 		first = (rand() % BOARD_SIZE) * 2;

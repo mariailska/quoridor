@@ -1,4 +1,4 @@
-//plik zawieraj¹cy deklaracje metod i pola klasy Menu
+//plik zawierajacy deklaracje metod i pola klasy Menu
 #pragma once
 #include"Game.h"
 #include<fstream>
@@ -7,13 +7,13 @@
 
 #define FILE_NAME "scores.txt"
 
-class Menu {//klasa spinaj¹ca rozgrywkê z plikiem tekstowym wyników oraz obs³ug¹ menu
+class Menu {//klasa spinajaca rozgrywke z plikiem tekstowym wynikow oraz obsluga menu
 private:
 	Game g;
 public:
-	int print_menu();
-	void print_scores(const char file_name[]);//wypisanie wyników z pliku tekstowego na ekran
+	int menu_actions();//realizowanie wypisywania menu i zwracania decyzji o wybranej opcji programu
+	void print_scores(const char file_name[]);//wypisanie wynikow z pliku tekstowego na ekran
 	void edit_file(const char file_name[], string winner_name, chrono::seconds game_time);//dopisywanie statystyk
-	string take_nick(int i);//pobranie nicku od gracza
-	Menu();
+	string take_nick(int gamer_number);//pobranie nicku od gracza
+	void gameplay();//wywolywanie (w zaleznosci od podanej w print_menu()) decyzji opcji rozgrywki
 };
